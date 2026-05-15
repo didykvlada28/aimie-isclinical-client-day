@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>iS Clinical Client Day — Aimie</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300..1000;1,9..40,300..1000&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #f3efe9;
+        --bg-deep: #e8e2d9;
+        --ink: #2c2c2c;
+        --ink-soft: #5c5652;
+        --brand: #174a86;
+        --brand-hover: #123c6e;
+        --white: #fffcf9;
+        --line: rgba(44, 44, 44, 0.1);
+        --shadow: 0 22px 56px rgba(23, 74, 134, 0.14);
+        --shadow-soft: 0 32px 64px rgba(0, 0, 0, 0.06);
+        --radius: 16px;
+        --header-h: 72px;
+        --img-radius: 16px;
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        font-family: "DM Sans", system-ui, -apple-system, sans-serif;
+        font-optical-sizing: auto;
+        background:
+          radial-gradient(
+            ellipse 100% 70% at 50% -15%,
+            rgba(255, 252, 249, 0.85) 0%,
+            transparent 55%
+          ),
+          var(--bg);
+        color: var(--ink);
+        font-size: 1.05rem;
+        line-height: 1.62;
+      }
+
+      @media (max-width: 767px) {
+        body {
+          padding-bottom: 108px;
+        }
+      }
+
+      img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .container {
+        width: min(1120px, 100% - 40px);
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      /* Header */
+      .header {
+        position: sticky;
+        top: 0;
+        z-index: 40;
+        height: var(--header-h);
+        display: flex;
+        align-items: center;
+        background: color-mix(in srgb, var(--bg) 88%, white);
+        border-bottom: 1px solid var(--line);
+        backdrop-filter: blur(12px);
+      }
+
+      .header__inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        width: 100%;
+      }
+
+      .brand-logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .brand-logo img {
+        height: 26px;
+        width: auto;
+      }
+
+      .header__actions {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+      }
+
+      .lang-switch {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        color: var(--ink-soft);
+      }
+
+      .lang-switch button {
+        background: none;
+        border: none;
+        padding: 6px 4px;
+        cursor: pointer;
+        font: inherit;
+        color: inherit;
+        transition: color 0.2s ease;
+      }
+
+      .lang-switch button:hover {
+        color: var(--brand);
+      }
+
+      .lang-switch button[aria-pressed="true"] {
+        color: var(--brand);
+      }
+
+      .lang-sep {
+        opacity: 0.45;
+        user-select: none;
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        padding: 13px 22px;
+        border-radius: 999px;
+        font-weight: 600;
+        font-size: 0.95rem;
+        border: none;
+        cursor: pointer;
+        transition: background 0.2s ease, transform 0.15s ease,
+          box-shadow 0.2s ease;
+        white-space: nowrap;
+      }
+
+      .btn:active {
+        transform: scale(0.98);
+      }
+
+      .btn--primary {
+        background: linear-gradient(165deg, #1c5599 0%, var(--brand) 55%, #143c6b 100%);
+        color: var(--white);
+        box-shadow:
+          0 4px 16px rgba(23, 74, 134, 0.35),
+          0 1px 0 rgba(255, 255, 255, 0.2) inset;
+      }
+
+      .btn--primary:hover {
+        background: linear-gradient(165deg, #1e5ba8 0%, var(--brand-hover) 55%, #0f3259 100%);
+        box-shadow:
+          0 8px 28px rgba(23, 74, 134, 0.45),
+          0 1px 0 rgba(255, 255, 255, 0.22) inset;
+        transform: translateY(-1px);
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .btn--primary:hover {
+          transform: none;
+        }
+      }
+
+      .btn--ghost {
+        background: transparent;
+        color: var(--brand);
+        border: 1px solid color-mix(in srgb, var(--brand) 35%, transparent);
+      }
+
+      .btn--ghost:hover {
+        background: color-mix(in srgb, var(--brand) 8%, transparent);
+      }
+
+      .header .header__cta {
+        display: none;
+        padding-inline: 18px;
+        font-size: 0.88rem;
+      }
+
+      @media (min-width: 768px) {
+        .header .header__cta {
+          display: inline-flex;
+        }
+      }
+
+      /* Hero */
+      .hero {
+        padding: 40px 0 44px;
+      }
+
+      .hero__grid {
+        display: grid;
+        gap: 40px;
+        align-items: center;
+      }
+
+      @media (min-width: 900px) {
+        .hero__grid {
+          grid-template-columns: 1.05fr 0.95fr;
+          gap: 56px;
+        }
+      }
+
+      .eyebrow {
+        font-size: 0.8rem;
+        text-transform: lowercase;
+        letter-spacing: 0.14em;
+        color: var(--ink-soft);
+        margin-bottom: 12px;
+      }
+
+      .hero h1 {
+        font-size: clamp(1.95rem, 3.8vw, 2.75rem);
+        line-height: 1.08;
+        font-weight: 700;
+        letter-spacing: -0.035em;
+        margin: 0 0 18px;
+      }
+
+      .hero__date-badge {
+        display: inline-flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+        margin: 0 0 26px;
+        padding: 16px 20px;
+        max-width: 100%;
+        background: linear-gradient(145deg, var(--white) 0%, #faf6f1 100%);
+        border-radius: 14px;
+        border: 1px solid color-mix(in srgb, var(--brand) 18%, var(--line));
+        border-left: 4px solid var(--brand);
+        box-shadow:
+          0 10px 36px rgba(23, 74, 134, 0.1),
+          0 1px 0 rgba(255, 255, 255, 0.8) inset;
+      }
+
+      .hero__date-day {
+        font-size: clamp(1.45rem, 4.2vw, 1.85rem);
+        font-weight: 740;
+        letter-spacing: -0.03em;
+        line-height: 1.1;
+        color: var(--brand);
+      }
+
+      .hero__date-rest {
+        font-size: 0.88rem;
+        font-weight: 500;
+        letter-spacing: 0.02em;
+        color: var(--ink-soft);
+      }
+
+      .hero__lede {
+        max-width: 44ch;
+        color: var(--ink-soft);
+        margin: 0 0 28px;
+      }
+
+      .hero__actions {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+        margin-bottom: 0;
+      }
+
+      .hero__visual {
+        border-radius: var(--img-radius);
+        overflow: hidden;
+        box-shadow: var(--shadow-soft);
+        background: var(--bg-deep);
+        height: clamp(220px, 34vh, 400px);
+        max-height: min(34vh, 400px);
+      }
+
+      .hero__visual img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: 50% 38%;
+      }
+
+      @media (min-width: 900px) {
+        .hero__visual {
+          height: clamp(260px, 36vh, 420px);
+          max-height: min(36vh, 420px);
+        }
+
+        .hero__visual img {
+          object-position: 50% 36%;
+        }
+      }
+
+      /* Sections */
+      .section {
+        padding: 52px 0;
+      }
+
+      .section--intro {
+        padding-top: 28px;
+        padding-bottom: 48px;
+      }
+
+      .section--soft {
+        background: linear-gradient(180deg, var(--bg-deep) 0%, var(--bg) 100%);
+      }
+
+      .split {
+        display: grid;
+        gap: 36px;
+        align-items: center;
+      }
+
+      @media (min-width: 880px) {
+        .split {
+          grid-template-columns: 1fr 1fr;
+          gap: 56px;
+        }
+
+        .split--reverse .figure {
+          order: 2;
+        }
+
+        .split--reverse .list-block {
+          order: 1;
+        }
+      }
+
+      .figure {
+        margin: 0;
+        border-radius: var(--img-radius);
+        overflow: hidden;
+        box-shadow: var(--shadow-soft);
+        height: clamp(200px, 28vh, 320px);
+        background: var(--bg-deep);
+      }
+
+      .figure img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+      }
+
+      .figure--portrait {
+        height: clamp(220px, 30vh, 340px);
+      }
+
+      .figure--portrait img {
+        object-position: 50% 35%;
+      }
+
+      /* Lifestyle / portrait hero — taller crop so face + bottle stay crisp */
+      .figure--lifestyle {
+        height: clamp(300px, 42vh, 460px);
+      }
+
+      .figure--lifestyle img {
+        object-fit: cover;
+        object-position: 54% 28%;
+      }
+
+      @media (min-width: 880px) {
+        .figure--lifestyle {
+          height: clamp(320px, 44vh, 480px);
+        }
+
+        .figure--lifestyle img {
+          object-position: 52% 26%;
+        }
+      }
+
+      /* Premium product showcase: editorial split — copy on solid ground, sharp product shot */
+      .product-showcase {
+        display: grid;
+        gap: clamp(36px, 6vw, 56px);
+        align-items: center;
+      }
+
+      @media (min-width: 900px) {
+        .product-showcase {
+          grid-template-columns: minmax(280px, 1fr) minmax(300px, 1.12fr);
+          gap: clamp(40px, 6vw, 72px);
+        }
+      }
+
+      .product-showcase__copy {
+        padding: clamp(4px, 2vw, 16px) 0;
+      }
+
+      @media (min-width: 900px) {
+        .product-showcase__copy {
+          padding-right: clamp(12px, 3vw, 28px);
+        }
+      }
+
+      .product-showcase__brand {
+        margin: 0 0 16px;
+        font-size: 0.69rem;
+        font-weight: 500;
+        letter-spacing: 0.26em;
+        text-transform: uppercase;
+        color: #355f90;
+      }
+
+      .product-showcase__title {
+        margin: 0 0 22px;
+        font-size: clamp(1.5rem, 3.6vw, 2.05rem);
+        font-weight: 700;
+        line-height: 1.14;
+        letter-spacing: -0.03em;
+        color: var(--ink);
+        max-width: 18ch;
+      }
+
+      .product-showcase__description {
+        margin: 0;
+        font-size: 1.03rem;
+        font-weight: 450;
+        line-height: 1.68;
+        color: var(--ink-soft);
+        max-width: 38ch;
+      }
+
+      .product-showcase__visual {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .product-showcase__frame {
+        width: 100%;
+        max-width: min(100%, 440px);
+        margin: 0 auto;
+        border-radius: 22px;
+        background:
+          radial-gradient(
+            ellipse 88% 80% at 50% 42%,
+            #faf7f2 0%,
+            #f0ebe3 52%,
+            #e6e0d6 100%
+          );
+        padding: clamp(28px, 6vw, 48px) clamp(24px, 5vw, 40px);
+        box-shadow:
+          0 26px 56px rgba(45, 42, 38, 0.09),
+          inset 0 1px 0 rgba(255, 255, 255, 0.55);
+      }
+
+      .product-showcase__frame img {
+        display: block;
+        width: 100%;
+        height: auto;
+        max-height: min(520px, 58vh);
+        object-fit: contain;
+        object-position: center;
+      }
+
+      @media (max-width: 899px) {
+        .product-showcase__visual {
+          order: -1;
+        }
+
+        .product-showcase__copy {
+          order: 1;
+          text-align: center;
+          padding-left: 0;
+          padding-right: 0;
+        }
+
+        .product-showcase__brand,
+        .product-showcase__title,
+        .product-showcase__description {
+          margin-left: auto;
+          margin-right: auto;
+        }
+      }
+
+      .product-showcase-follow {
+        margin-top: clamp(44px, 7vw, 72px);
+        padding-top: clamp(40px, 6vw, 56px);
+        border-top: 1px solid var(--line);
+      }
+
+      h2 {
+        font-size: clamp(1.35rem, 2.4vw, 1.65rem);
+        font-weight: 650;
+        letter-spacing: -0.02em;
+        margin: 0 0 18px;
+      }
+
+      .prose p {
+        margin: 0 0 16px;
+        color: var(--ink-soft);
+      }
+
+      .prose p:last-child {
+        margin-bottom: 0;
+      }
+
+      .list-block {
+        margin-top: 40px;
+      }
+
+      .list-block h2 {
+        margin-bottom: 14px;
+      }
+
+      .list-block + .list-block {
+        margin-top: 32px;
+      }
+
+      ul.pill-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      ul.pill-list li {
+        position: relative;
+        padding: 14px 0 14px 28px;
+        border-bottom: 1px solid var(--line);
+        color: var(--ink-soft);
+      }
+
+      ul.pill-list li:last-child {
+        border-bottom: none;
+      }
+
+      ul.pill-list li::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 1.15em;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--brand);
+        opacity: 0.85;
+      }
+
+      /* Final CTA */
+      .final-cta {
+        padding: 64px 0 88px;
+        text-align: center;
+      }
+
+      .final-cta__card {
+        background: linear-gradient(180deg, #fffcf9 0%, #f7f2ec 100%);
+        border-radius: 26px;
+        padding: clamp(32px, 6vw, 56px);
+        box-shadow: var(--shadow-soft);
+        border: 1px solid color-mix(in srgb, var(--line) 80%, transparent);
+      }
+
+      .final-cta h2 {
+        font-size: clamp(1.5rem, 3vw, 2rem);
+        margin-bottom: 14px;
+      }
+
+      .final-cta p {
+        margin: 0 auto 26px;
+        max-width: 50ch;
+        color: var(--ink-soft);
+        font-size: 1.02rem;
+      }
+
+      .final-cta__wa-note {
+        margin: 6px auto 24px;
+        font-size: 0.82rem;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        font-weight: 600;
+        color: #128c7e;
+      }
+
+      .btn--xl {
+        padding: 18px 36px;
+        font-size: 1.05rem;
+      }
+
+      .icon-wa {
+        width: 22px;
+        height: 22px;
+        flex-shrink: 0;
+      }
+
+      /* Footer */
+      .footer {
+        padding: 28px 0 48px;
+        text-align: center;
+        font-size: 0.85rem;
+        color: var(--ink-soft);
+        border-top: 1px solid var(--line);
+      }
+
+      /* Sticky mobile CTA */
+      .sticky-cta {
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 50;
+        padding: 12px 16px calc(10px + env(safe-area-inset-bottom));
+        background: color-mix(in srgb, var(--bg) 94%, white);
+        border-top: 1px solid var(--line);
+        backdrop-filter: blur(12px);
+        display: none;
+        box-shadow: 0 -12px 40px rgba(0, 0, 0, 0.06);
+      }
+
+      .sticky-cta .btn {
+        width: 100%;
+        padding-block: 15px;
+      }
+
+      .sticky-cta__hint {
+        margin: 8px 0 0;
+        text-align: center;
+        font-size: 0.75rem;
+        color: var(--ink-soft);
+        line-height: 1.35;
+      }
+
+      @media (max-width: 767px) {
+        .sticky-cta {
+          display: block;
+        }
+      }
+
+      @media (min-width: 768px) {
+        body {
+          padding-bottom: 0 !important;
+        }
+      }
+
+    </style>
+  </head>
+  <body>
+    <header class="header">
+      <div class="container header__inner">
+        <a class="brand-logo" href="#" aria-label="Aimie">
+          <img src="images/aimie-logo.png" alt="aimie" width="120" height="32" />
+        </a>
+        <div class="header__actions">
+          <div class="lang-switch" role="group" aria-label="Language">
+            <button type="button" id="lang-ru" aria-pressed="true">RU</button>
+            <span class="lang-sep" aria-hidden="true">|</span>
+            <button type="button" id="lang-en" aria-pressed="false">EN</button>
+          </div>
+          <a
+            class="btn btn--primary wa-link header__cta"
+            href="https://wa.me/35799977871"
+            target="_blank"
+            rel="noopener noreferrer"
+            data-i18n="cta"
+          >
+            Оставить заявку
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="container hero__grid">
+          <div>
+            <p class="eyebrow" data-i18n="heroEyebrow">aimie · limassol</p>
+            <h1 data-i18n="heroTitle">iS Clinical Client Day в Aimie</h1>
+            <div class="hero__date-badge">
+              <span class="hero__date-day" data-i18n="heroDateDay">29 мая</span>
+              <span class="hero__date-rest"
+                ><span data-i18n="heroDateEvent">Клиентский день</span
+                ><span aria-hidden="true"> · </span
+                ><span data-i18n="heroDatePlace">Лимасол</span></span
+              >
+            </div>
+            <p class="hero__lede" data-i18n="heroLead">
+              iS Clinical — один из самых узнаваемых профессиональных брендов
+              уходовой косметики, эксклюзивно представленный на Кипре в Aimie.
+            </p>
+            <div class="hero__actions">
+              <a
+                class="btn btn--primary wa-link"
+                href="https://wa.me/35799977871"
+                target="_blank"
+                rel="noopener noreferrer"
+                data-i18n="cta"
+                >Оставить заявку</a
+              >
+            </div>
+          </div>
+          <div class="hero__visual">
+            <img
+              src="images/hero-retinol.png"
+              alt=""
+              loading="eager"
+              width="900"
+              height="1120"
+            />
+          </div>
+        </div>
+      </section>
+
+      <section class="section section--intro">
+        <div class="container prose">
+          <p data-i18n="introP1"></p>
+        </div>
+      </section>
+
+      <section class="section section--soft">
+        <div class="container split">
+          <figure class="figure">
+            <img
+              src="images/product-moisture.png"
+              alt=""
+              loading="lazy"
+              width="900"
+              height="720"
+            />
+          </figure>
+          <div class="list-block" style="margin-top: 0">
+            <h2 data-i18n="dayTitle"></h2>
+            <ul class="pill-list" id="list-day"></ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container split split--reverse">
+          <figure class="figure figure--portrait figure--lifestyle">
+            <img
+              src="images/hero-lifestyle.png"
+              alt=""
+              loading="lazy"
+              width="900"
+              height="1200"
+            />
+          </figure>
+          <div class="list-block" style="margin-top: 0">
+            <h2 data-i18n="whyTitle"></h2>
+            <ul class="pill-list" id="list-why"></ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section--soft">
+        <div class="container">
+          <div class="product-showcase" aria-labelledby="eye-serum-heading">
+            <div class="product-showcase__copy">
+              <p class="product-showcase__brand">iS Clinical</p>
+              <h3 class="product-showcase__title" id="eye-serum-heading" data-i18n="eyeSerumName"></h3>
+              <p class="product-showcase__description" data-i18n="eyeSerumLine"></p>
+            </div>
+            <div class="product-showcase__visual">
+              <div class="product-showcase__frame">
+                <img
+                  src="images/product-eye-serum.png"
+                  alt="iS Clinical C Eye Serum Advance+"
+                  loading="lazy"
+                  width="900"
+                  height="1200"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="container product-showcase-follow">
+          <div class="list-block" style="margin-top: 0">
+            <h2 data-i18n="guestsTitle"></h2>
+            <ul class="pill-list" id="list-guests"></ul>
+            <p style="margin-top: 24px; color: var(--ink-soft)" data-i18n="limited"></p>
+            <div style="margin-top: 22px">
+              <a
+                class="btn btn--primary wa-link"
+                href="https://wa.me/35799977871"
+                target="_blank"
+                rel="noopener noreferrer"
+                data-i18n="cta"
+                >Оставить заявку</a
+              >
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="final-cta">
+        <div class="container">
+          <div class="final-cta__card">
+            <h2 data-i18n="finalTitle"></h2>
+            <p data-i18n="finalText"></p>
+            <p class="final-cta__wa-note" data-i18n="finalWaNote"></p>
+            <a
+              class="btn btn--primary btn--xl wa-link"
+              href="https://wa.me/35799977871"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <svg
+                class="icon-wa"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.435 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"
+                />
+              </svg>
+              <span data-i18n="cta">Оставить заявку</span>
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <span data-i18n="footer"></span>
+      </div>
+    </footer>
+
+    <div class="sticky-cta">
+      <a
+        class="btn btn--primary wa-link"
+        href="https://wa.me/35799977871"
+        target="_blank"
+        rel="noopener noreferrer"
+        data-i18n="cta"
+        >Оставить заявку</a
+      >
+      <p class="sticky-cta__hint" data-i18n="stickyHint"></p>
+    </div>
+
+    <script>
+      (function () {
+        const WA_PHONE = "35799977871";
+        const WA_TEXT = {
+          ru: "Здравствуйте! Хочу записаться на iS Clinical Client Day в Aimie 29 мая",
+          en: "Hello! I would like to book my place for the iS Clinical Client Day at Aimie on May 29.",
+        };
+
+        const COPY = {
+          ru: {
+            cta: "Оставить заявку",
+            heroEyebrow: "aimie · limassol",
+            heroTitle: "iS Clinical Client Day в Aimie",
+            heroDateDay: "29 мая",
+            heroDateEvent: "Клиентский день",
+            heroDatePlace: "Лимасол",
+            heroLead:
+              "iS Clinical — один из самых узнаваемых профессиональных брендов уходовой косметики, эксклюзивно представленный на Кипре в Aimie.",
+            introP1:
+              "29 мая в Aimie пройдёт iS Clinical Client Day — день, посвящённый диагностике кожи, персональным рекомендациям по уходу и знакомству с продуктами iS Clinical.",
+            dayTitle: "В этот день гости смогут",
+            dayItems: [
+              "получить персональную диагностику кожи",
+              "получить экспертные рекомендации",
+              "подобрать домашний уход с учётом состояния кожи и потребностей",
+              "познакомиться с продуктами iS Clinical",
+              "посетить мини-лекцию представителя бренда",
+              "записаться на процедуры и услуги по уходу",
+            ],
+            whyTitle: "iS Clinical выбирают за",
+            whyItems: [
+              "заметное улучшение качества кожи",
+              "глубокое увлажнение и восстановление",
+              "поддержку при чувствительности и обезвоженности",
+              "деликатный anti-age подход",
+              "естественное сияние и ухоженный вид кожи",
+            ],
+            guestsTitle: "Для гостей Client Day",
+            guestItems: [
+              "персональный подбор ухода",
+              "специальные условия на процедуры",
+              "подарки от iS Clinical",
+            ],
+            eyeSerumName: "C Eye Serum Advance+",
+            eyeSerumLine:
+              "Профессиональная сыворотка для нежной зоны вокруг глаз.",
+            limited: "Места для диагностики кожи ограничены.",
+            finalTitle: "Запись на Client Day",
+            finalText:
+              "Напишите нам в WhatsApp, чтобы забронировать место и получить персональную консультацию специалистов Aimie и iS Clinical.",
+            finalWaNote: "Продолжить в WhatsApp",
+            footer: "© aimie · Limassol",
+            stickyHint: "Прямой чат с салоном — без форм и ожидания.",
+          },
+          en: {
+            cta: "Book Your Place",
+            heroEyebrow: "aimie · limassol",
+            heroTitle: "iS Clinical Client Day at Aimie",
+            heroDateDay: "May 29",
+            heroDateEvent: "Client Day",
+            heroDatePlace: "Limassol",
+            heroLead:
+              "iS Clinical is one of the most recognized professional skincare brands, exclusively represented in Cyprus at Aimie.",
+            introP1:
+              "On May 29, Aimie will host an iS Clinical Client Day dedicated to skin diagnostics, personalized skincare recommendations, and an introduction to iS Clinical products.",
+            dayTitle: "On this day, guests will be able to",
+            dayItems: [
+              "receive a personalized skin diagnosis",
+              "get expert recommendations",
+              "choose home skincare based on their skin condition and needs",
+              "discover iS Clinical products",
+              "attend a mini lecture by a brand representative",
+              "book treatments and skincare services",
+            ],
+            whyTitle: "iS Clinical is chosen for",
+            whyItems: [
+              "visible improvement in skin quality",
+              "deep hydration and recovery",
+              "support for sensitivity and dehydration",
+              "a delicate anti-age approach",
+              "natural glow and a well-groomed skin appearance",
+            ],
+            guestsTitle: "For Client Day guests",
+            guestItems: [
+              "personalized skincare selection",
+              "special conditions on treatments",
+              "gifts from iS Clinical",
+            ],
+            eyeSerumName: "C Eye Serum Advance+",
+            eyeSerumLine:
+              "Professional serum for the delicate eye contour.",
+            limited: "Places for skin diagnostics are limited.",
+            finalTitle: "Book Your Place",
+            finalText:
+              "Message us on WhatsApp to book your place and receive a personalized consultation from Aimie and iS Clinical specialists.",
+            finalWaNote: "Continue in WhatsApp",
+            footer: "© aimie · Limassol",
+            stickyHint: "Direct chat with the salon — no forms, no waiting.",
+          },
+        };
+
+        const listIds = [
+          { id: "list-day", key: "dayItems" },
+          { id: "list-why", key: "whyItems" },
+          { id: "list-guests", key: "guestItems" },
+        ];
+
+        function waUrl(lang) {
+          return (
+            "https://wa.me/" +
+            WA_PHONE +
+            "?text=" +
+            encodeURIComponent(WA_TEXT[lang])
+          );
+        }
+
+        function fillLists(lang) {
+          const c = COPY[lang];
+          listIds.forEach(({ id, key }) => {
+            const ul = document.getElementById(id);
+            if (!ul) return;
+            ul.innerHTML = "";
+            c[key].forEach(function (text) {
+              const li = document.createElement("li");
+              li.textContent = text;
+              ul.appendChild(li);
+            });
+          });
+        }
+
+        function applyLang(lang) {
+          document.documentElement.lang = lang === "ru" ? "ru" : "en";
+          const c = COPY[lang];
+          document.querySelectorAll("[data-i18n]").forEach(function (el) {
+            const k = el.getAttribute("data-i18n");
+            if (!k || !(k in c)) return;
+            el.textContent = c[k];
+          });
+
+          const url = waUrl(lang);
+          document.querySelectorAll(".wa-link").forEach(function (a) {
+            a.href = url;
+          });
+
+          fillLists(lang);
+
+          document.getElementById("lang-ru").setAttribute(
+            "aria-pressed",
+            lang === "ru" ? "true" : "false"
+          );
+          document.getElementById("lang-en").setAttribute(
+            "aria-pressed",
+            lang === "en" ? "true" : "false"
+          );
+
+          try {
+            localStorage.setItem("aimie-isclinical-lang", lang);
+          } catch (_) {}
+        }
+
+        document.getElementById("lang-ru").addEventListener("click", function () {
+          applyLang("ru");
+        });
+        document.getElementById("lang-en").addEventListener("click", function () {
+          applyLang("en");
+        });
+
+        let initial = "ru";
+        try {
+          const saved = localStorage.getItem("aimie-isclinical-lang");
+          if (saved === "en" || saved === "ru") initial = saved;
+        } catch (_) {}
+
+        applyLang(initial);
+      })();
+    </script>
+  </body>
+</html>
