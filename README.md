@@ -19,9 +19,11 @@ npm run preview
 
 Opens `dist/` on port 3000.
 
-## Deploy (Vercel)
+## Deploy (GitHub + Vercel)
 
-1. Push this repo to GitHub.
+Кратко: **[DEPLOY.md](./DEPLOY.md)** и **`scripts/publish.ps1`** (один раз выполните `gh auth login`).
+
+1. Push this repo to GitHub (или запустите `publish.ps1`).
 2. In Vercel: **New Project** → import the repo.
 3. **Framework preset:** Other (static).
 4. **Settings:**  
