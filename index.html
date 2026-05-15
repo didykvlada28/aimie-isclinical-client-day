@@ -7,43 +7,35 @@
       content="width=device-width, initial-scale=1, viewport-fit=cover"
     />
     <title>iS Clinical Client Day — Aimie</title>
-    <!-- Meta Pixel: вставьте ID пикселя (только цифры) из https://business.facebook.com/events_manager2 -->
+    <!-- Meta Pixel Code -->
     <script>
-      window.__AIMIE_META_PIXEL_ID__ = "";
+      !(function (f, b, e, v, n, t, s) {
+        if (f.fbq) return;
+        n = f.fbq = function () {
+          n.callMethod
+            ? n.callMethod.apply(n, arguments)
+            : n.queue.push(arguments);
+        };
+        if (!f._fbq) f._fbq = n;
+        n.push = n;
+        n.loaded = !0;
+        n.version = "2.0";
+        n.queue = [];
+        t = b.createElement(e);
+        t.async = !0;
+        t.src = v;
+        s = b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t, s);
+      })(
+        window,
+        document,
+        "script",
+        "https://connect.facebook.net/en_US/fbevents.js",
+      );
+      fbq("init", "1704916847187005");
+      fbq("track", "PageView");
     </script>
-    <script>
-      (function () {
-        var raw = window.__AIMIE_META_PIXEL_ID__;
-        if (raw == null || raw === "") return;
-        var id = String(raw).replace(/\D/g, "");
-        if (id.length < 15 || id.length > 16) return;
-        !(function (f, b, e, v, n, t, s) {
-          if (f.fbq) return;
-          n = f.fbq = function () {
-            n.callMethod
-              ? n.callMethod.apply(n, arguments)
-              : n.queue.push(arguments);
-          };
-          if (!f._fbq) f._fbq = n;
-          n.push = n;
-          n.loaded = !0;
-          n.version = "2.0";
-          n.queue = [];
-          t = b.createElement(e);
-          t.async = !0;
-          t.src = v;
-          s = b.getElementsByTagName(e)[0];
-          s.parentNode.insertBefore(t, s);
-        })(
-          window,
-          document,
-          "script",
-          "https://connect.facebook.net/en_US/fbevents.js",
-        );
-        fbq("init", id);
-        fbq("track", "PageView");
-      })();
-    </script>
+    <!-- End Meta Pixel Code -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -744,6 +736,15 @@
     </style>
   </head>
   <body>
+    <noscript>
+      <img
+        height="1"
+        width="1"
+        style="display: none"
+        src="https://www.facebook.com/tr?id=1704916847187005&amp;ev=PageView&amp;noscript=1"
+        alt=""
+      />
+    </noscript>
     <header class="header">
       <div class="container header__inner">
         <a class="brand-logo" href="/" aria-label="Aimie">
