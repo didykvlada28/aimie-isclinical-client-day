@@ -7,6 +7,43 @@
       content="width=device-width, initial-scale=1, viewport-fit=cover"
     />
     <title>iS Clinical Client Day — Aimie</title>
+    <!-- Meta Pixel: вставьте ID пикселя (только цифры) из https://business.facebook.com/events_manager2 -->
+    <script>
+      window.__AIMIE_META_PIXEL_ID__ = "";
+    </script>
+    <script>
+      (function () {
+        var raw = window.__AIMIE_META_PIXEL_ID__;
+        if (raw == null || raw === "") return;
+        var id = String(raw).replace(/\D/g, "");
+        if (id.length < 15 || id.length > 16) return;
+        !(function (f, b, e, v, n, t, s) {
+          if (f.fbq) return;
+          n = f.fbq = function () {
+            n.callMethod
+              ? n.callMethod.apply(n, arguments)
+              : n.queue.push(arguments);
+          };
+          if (!f._fbq) f._fbq = n;
+          n.push = n;
+          n.loaded = !0;
+          n.version = "2.0";
+          n.queue = [];
+          t = b.createElement(e);
+          t.async = !0;
+          t.src = v;
+          s = b.getElementsByTagName(e)[0];
+          s.parentNode.insertBefore(t, s);
+        })(
+          window,
+          document,
+          "script",
+          "https://connect.facebook.net/en_US/fbevents.js",
+        );
+        fbq("init", id);
+        fbq("track", "PageView");
+      })();
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -1060,6 +1097,29 @@
             localStorage.setItem("aimie-isclinical-lang", lang);
           } catch (_) {}
         }
+
+        function waPlacement(el) {
+          if (el.classList.contains("header__cta")) return "header";
+          if (el.closest(".sticky-cta")) return "sticky_bottom";
+          if (el.closest(".final-cta")) return "final_block";
+          if (el.closest(".hero")) return "hero";
+          if (el.closest(".product-showcase-follow")) return "product_guests";
+          return "other";
+        }
+
+        document.addEventListener(
+          "click",
+          function (e) {
+            var a = e.target.closest(".wa-link");
+            if (!a || typeof fbq !== "function") return;
+            fbq("track", "Lead", {
+              content_name: "whatsapp_booking",
+              content_category: "cta",
+              placement: waPlacement(a),
+            });
+          },
+          true,
+        );
 
         document.getElementById("lang-ru").addEventListener("click", function () {
           applyLang("ru");
