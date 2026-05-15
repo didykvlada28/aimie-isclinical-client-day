@@ -2,7 +2,10 @@
 <html lang="ru">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
     <title>iS Clinical Client Day — Aimie</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -35,6 +38,7 @@
 
       html {
         scroll-behavior: smooth;
+        scroll-padding-top: calc(var(--header-h) + env(safe-area-inset-top, 0px) + 10px);
       }
 
       body {
@@ -51,6 +55,8 @@
         color: var(--ink);
         font-size: 1.05rem;
         line-height: 1.62;
+        /* Offset for fixed header so content is not hidden underneath */
+        padding-top: calc(var(--header-h) + env(safe-area-inset-top, 0px));
       }
 
       @media (max-width: 767px) {
@@ -78,10 +84,13 @@
 
       /* Header */
       .header {
-        position: sticky;
+        position: fixed;
         top: 0;
+        left: 0;
+        right: 0;
         z-index: 40;
-        height: var(--header-h);
+        height: calc(var(--header-h) + env(safe-area-inset-top, 0px));
+        padding-top: env(safe-area-inset-top, 0px);
         display: flex;
         align-items: center;
         background: color-mix(in srgb, var(--bg) 88%, white);
