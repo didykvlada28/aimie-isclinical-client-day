@@ -38,7 +38,7 @@
 
       html {
         scroll-behavior: smooth;
-        scroll-padding-top: calc(var(--header-h) + env(safe-area-inset-top, 0px) + 10px);
+        scroll-padding-top: 12px;
       }
 
       body {
@@ -55,8 +55,6 @@
         color: var(--ink);
         font-size: 1.05rem;
         line-height: 1.62;
-        /* Offset for fixed header so content is not hidden underneath */
-        padding-top: calc(var(--header-h) + env(safe-area-inset-top, 0px));
       }
 
       @media (max-width: 767px) {
@@ -82,20 +80,53 @@
         margin-right: auto;
       }
 
-      /* Header */
+      /* Header — in document flow (scrolls away); not sticky/fixed */
       .header {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        z-index: 40;
-        height: calc(var(--header-h) + env(safe-area-inset-top, 0px));
+        position: relative;
+        z-index: 10;
+        min-height: calc(var(--header-h) + env(safe-area-inset-top, 0px));
         padding-top: env(safe-area-inset-top, 0px);
         display: flex;
         align-items: center;
-        background: color-mix(in srgb, var(--bg) 88%, white);
+        background: color-mix(in srgb, var(--bg) 94%, var(--white));
         border-bottom: 1px solid var(--line);
-        backdrop-filter: blur(12px);
+      }
+
+      @media (max-width: 767px) {
+        :root {
+          --header-h: 68px;
+        }
+
+        .header {
+          background: var(--bg);
+          border-bottom: 1px solid rgba(44, 44, 44, 0.07);
+        }
+
+        .header__inner {
+          gap: 12px;
+        }
+
+        .brand-logo img {
+          height: 24px;
+          width: auto;
+        }
+
+        .lang-switch {
+          font-size: 0.78rem;
+          gap: 6px;
+          letter-spacing: 0.05em;
+        }
+
+        .lang-switch button {
+          padding: 4px 3px;
+        }
+      }
+
+      @media (min-width: 768px) {
+        .header {
+          backdrop-filter: blur(10px);
+          -webkit-backdrop-filter: blur(10px);
+        }
       }
 
       .header__inner {
