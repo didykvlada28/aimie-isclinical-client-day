@@ -3,14 +3,14 @@ import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
-const dist = join(root, "dist");
+const out = join(root, "public");
 
-if (existsSync(dist)) {
-  rmSync(dist, { recursive: true, force: true });
+if (existsSync(out)) {
+  rmSync(out, { recursive: true, force: true });
 }
-mkdirSync(dist, { recursive: true });
+mkdirSync(out, { recursive: true });
 
-cpSync(join(root, "index.html"), join(dist, "index.html"));
-cpSync(join(root, "images"), join(dist, "images"), { recursive: true });
+cpSync(join(root, "index.html"), join(out, "index.html"));
+cpSync(join(root, "images"), join(out, "images"), { recursive: true });
 
-console.log("Build OK → dist/ (index.html + images/)");
+console.log("Build OK → public/ (index.html + images/)");

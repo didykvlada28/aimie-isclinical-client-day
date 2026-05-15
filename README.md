@@ -7,7 +7,7 @@ RU/EN language switch, all CTAs → WhatsApp.
 
 ```bash
 node scripts/build.mjs
-npx --yes serve@14 dist -l 3000
+npx --yes serve@14 public -l 3000
 ```
 
 Or with npm (when available):
@@ -17,7 +17,7 @@ npm run build
 npm run preview
 ```
 
-Opens `dist/` on port 3000.
+Opens `public/` on port 3000.
 
 ## Deploy (GitHub + Vercel)
 
@@ -29,9 +29,9 @@ Opens `dist/` on port 3000.
 4. **Settings:**  
    - **Install Command:** `npm install` (optional; no deps)  
    - **Build Command:** `npm run build`  
-   - **Output Directory:** `dist`
+   - **Output Directory:** `public`
 5. Deploy. Use the default `*.vercel.app` URL (e.g. `aimie-isclinical-client-day.vercel.app` if that project name is free).
 
 ## Assets
 
-Product and brand images live in `images/`. After changing `index.html` or `images/`, run `npm run build` before checking `dist/`.
+Product and brand images live in `images/`. After changing `index.html` or `images/`, run `npm run build` before checking `public/`.

@@ -5,7 +5,7 @@
   "description": "iS Clinical Client Day at Aimie — static landing (RU/EN, WhatsApp CTA)",
   "scripts": {
     "build": "node scripts/build.mjs",
-    "preview": "npx --yes serve@14 dist -l 3000",
+    "preview": "npx --yes serve@14 public -l 3000",
     "preview:root": "npx --yes serve@14 . -l 3000"
   },
   "engines": {

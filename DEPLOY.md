@@ -34,7 +34,7 @@ powershell -ExecutionPolicy Bypass -File .\scripts\publish.ps1
 3. Настройки:
    - **Framework:** Other  
    - **Build Command:** `npm run build`  
-   - **Output Directory:** `dist`  
+   - **Output Directory:** `public`  
 4. **Deploy**. Ссылка вида `https://aimie-isclinical-client-day.vercel.app` появится после сборки.
 
 ## Если логин GitHub не `tzahishimkin`
